@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-typography variant="h1">Genres</v-typography>
+        <v-typography variant="h1">Genre</v-typography>
       </v-col>
       <v-col v-for="genre in genres" :key="genre.name" cols="12" md="6">
         <v-card>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+// importing the function from API module
 import { fetchMoviesByGenre } from '../../api/api.js';
 
 export default {
@@ -56,13 +57,14 @@ export default {
   },
   methods: {
     async loadGenres() {
-      for (let genre of this.genres) {
-        const result = await fetchMoviesByGenre(genre.name);
-        genre.count = result.count;
-        genre.movies = result.movies;
+      const promises = this.genres.map(async (genre) => { //itereating over genres and collecting them in promises array
+        const { count, movies } = await fetchMoviesByGenre(genre.name.toLowerCase()); //fetching movies by genre awaiting function to complete
+        genre.count = count;
+        genre.movies = movies;
+      });
+      await Promise.all(promises);
       }
     },
-  },
 };
 </script>
 
