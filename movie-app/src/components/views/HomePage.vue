@@ -15,15 +15,7 @@
           </v-card-title>
           <v-row>
             <v-col v-for="movie in genre.movies.slice(0, 3)" :key="movie.id" cols="12" sm="6" md="4">
-              <v-card>
-                <v-img :src="movie.cover" aspect-ratio="1.75"></v-img>
-                <v-card-title>{{ movie.title }}</v-card-title>
-                <v-card-actions>
-                  <router-link :to="{ name: 'MovieInfo', params: { id: movie.id } }">
-                    <v-btn>View Details</v-btn>
-                  </router-link>
-                </v-card-actions>
-              </v-card>
+              <MovieItem :cover="movie.cover" :title="movie.title"></MovieItem>
             </v-col>
           </v-row>
         </v-card>
@@ -35,8 +27,12 @@
 <script>
 // importing the function from API module
 import { fetchMoviesByGenre } from '../../api/api.js';
+import MovieItem from '../MovieItem.vue';
 
 export default {
+  components: {
+    MovieItem,
+  },
   data() {
     return {
       genres: [
