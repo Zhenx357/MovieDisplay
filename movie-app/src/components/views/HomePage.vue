@@ -9,9 +9,6 @@
           <v-card-title>
             <v-typography variant="h2">{{ genre.name }} ({{ genre.count }})</v-typography>
             <v-spacer></v-spacer>
-            <router-link :to="{ name: 'Genre', params: { genre: genre.name.toLowerCase() } }">
-              <v-btn text>View All</v-btn>
-            </router-link>
           </v-card-title>
           <v-row align="center" class="align-center">
             <v-col cols="1" class text="text-center">

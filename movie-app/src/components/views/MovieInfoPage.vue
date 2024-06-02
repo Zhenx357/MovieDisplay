@@ -6,7 +6,7 @@
             <v-img :src="movie.cover" aspect-ratio="1.75"></v-img>
             <v-card-title>{{ movie.title }}</v-card-title>
             <v-card-text>
-              <p>Details about {{ movie.title }} will go here.</p>
+              <p>Details about {{ movie.title }} will go here1.</p>
             </v-card-text>
           </v-card>
         </v-col>
