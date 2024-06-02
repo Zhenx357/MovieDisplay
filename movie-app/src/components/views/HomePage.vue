@@ -4,7 +4,7 @@
       <v-col cols="12">
         <v-typography variant="h1">Genre</v-typography>
       </v-col>
-      <v-col v-for="genre in genres" :key="genre.name" cols="12" md="6">
+      <v-col v-for="genre in genres" :key="genre.name" cols="12">
         <v-card>
           <v-card-title>
             <v-typography variant="h2">{{ genre.name }} ({{ genre.count }})</v-typography>
@@ -13,16 +13,16 @@
               <v-btn text>View All</v-btn>
             </router-link>
           </v-card-title>
-          <v-row align="center">
-            <v-col cols="1">
+          <v-row align="center" class="align-center">
+            <v-col cols="1" class text="text-center">
               <v-btn icon @click="previousMovies(genre)">
                 <v-icon>mdi-chevron-left</v-icon>
               </v-btn>
             </v-col>
-            <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +3)" :key="movie.id" cols="12" sm="6" md="4">
+            <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +3)" :key="movie.id" cols="3" sm="3" md="3">
               <MovieItem :cover="movie.cover" :title="movie.title"></MovieItem>
             </v-col>
-            <v-col cols="1">
+            <v-col cols="1" class="text-center">
               <v-btn icon @click="nextMovies(genre)">
                 <v-icon>mdi-chevron-right</v-icon>
               </v-btn>
