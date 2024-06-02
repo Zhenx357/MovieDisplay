@@ -13,16 +13,21 @@
               <v-btn text>View All</v-btn>
             </router-link>
           </v-card-title>
-          <v-row>
-            <v-col v-for="movie in genre.movies.slice(0, genre.moviesLoaded)" :key="movie.id" cols="12" sm="6" md="4">
+          <v-row align="center">
+            <v-col cols="1">
+              <v-btn icon @click="previousMovies(genre)">
+                <v-icon>mdi-chevron-left</v-icon>
+              </v-btn>
+            </v-col>
+            <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +3)" :key="movie.id" cols="12" sm="6" md="4">
               <MovieItem :cover="movie.cover" :title="movie.title"></MovieItem>
             </v-col>
+            <v-col cols="1">
+              <v-btn icon @click="nextMovies(genre)">
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-col>
           </v-row>
-          <v-row justify="center">
-      <v-col cols="12" class="text-center">
-        <v-btn v-if="genre.moviesLoaded < genre.movies.length" @click="loadMoreMovies(genre)">Load More</v-btn>
-      </v-col>
-    </v-row>
         </v-card>
       </v-col>
     </v-row>
@@ -41,15 +46,15 @@ export default {
   data() {
     return {
       genres: [
-        { name: 'Action', count: 0, movies: [], moviesLoaded: 3},
-        { name: 'Comedy', count: 0, movies: [], moviesLoaded: 3 },
-        { name: 'Thriller', count: 0, movies: [], moviesLoaded: 3},
-        { name: 'War', count: 0, movies: [], moviesLoaded: 3},
-        { name: 'Romance', count: 0, movies: [], moviesLoaded: 3 },
-        { name: 'Drama', count: 0, movies: [], moviesLoaded: 3},
-        { name: 'Crime', count: 0, movies: [], moviesLoaded: 3},
-        { name: 'Documentary', count: 0, movies: [], moviesLoaded: 3},
-        { name: 'Horror', count: 0, movies: [], moviesLoaded: 3},
+        { name: 'Action', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'Comedy', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'Thriller', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'War', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'Romance', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'Drama', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'Crime', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'Documentary', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
+        { name: 'Horror', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
       ],
     };
   },
@@ -66,11 +71,17 @@ export default {
       });
       await Promise.all(promises);
       },
-      loadMoreMovies(genre) {
-      const newMoviesLoaded = genre.moviesLoaded + 3;
-      genre.moviesLoaded = newMoviesLoaded > genre.movies.length ? genre.movies.length : newMoviesLoaded;
-    }
+      nextMovies(genre) {
+      if (genre.currentIndex + 3 < genre.movies.length) {
+        genre.currentIndex += 3;
+      }
     },
+    previousMovies(genre) {
+      if (genre.currentIndex > 0) {
+        genre.currentIndex -= 3;
+      }
+    },
+  },
 };
 </script>
 
