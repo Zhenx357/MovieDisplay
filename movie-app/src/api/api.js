@@ -29,9 +29,11 @@ const fetchThumbnail = (entry) => {
 const mapData = (data) => {
   return data.entries.map(entry => {
     const coverUrl = fetchThumbnail(entry);
+    const id = entry.id.split('/').pop(); //extracts the id from the url example: data/ProgramAvailability/41644072040 -> 41644072040
     return {
       cover: coverUrl,
       title: entry.title,
+      id: id,
     };
   });
 };

@@ -1,6 +1,9 @@
 <template>
     <v-card>
+        <router-link :to="'/movie/' + movieID">
+            
         <v-img :src="cover" aspect-ratio="1.75"></v-img>
+    </router-link>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-actions>
         </v-card-actions>
@@ -8,6 +11,8 @@
 </template>
 
 <script>
+
+
 
 export default {
     props: {
@@ -19,10 +24,13 @@ export default {
             type: String,
             required: true,
         },
+        movieID: {
+            type: [String, Number],
+            required: true,
+        },
     },
     methods: {
         viewDetails() {
-            
         },
     },
 };

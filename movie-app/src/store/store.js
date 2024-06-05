@@ -25,21 +25,23 @@ export default createStore({
         genre.count = count;
       }
     },
+    // Load the next 3 movies
     nextMovies(state, genreName) {
-      const genre = state.genres.find(g => g.name === genreName);
-      if (genre && genre.currentIndex + 3 < genre.movies.length) {
+      const genre = state.genres.find(g => g.name === genreName); // finds the genre that matches the genreName
+      if (genre) {
         genre.currentIndex += 3;
       }
     },
+    // Load the previous 3 movies
     previousMovies(state, genreName) {
       const genre = state.genres.find(g => g.name === genreName);
-      if (genre && genre.currentIndex > 0) {
+      if (genre && genre.currentIndex >=3) {
         genre.currentIndex -= 3;
       }
     },
   },
   actions: {
-    // Load the movies for each genre
+    // Load the movies for each genre 
     async loadGenres({ commit, state }) {
       const promises = state.genres.map(async (genre) => {
         const { count, movies } = await fetchMoviesByGenre(genre.name.toLowerCase());
@@ -47,6 +49,7 @@ export default createStore({
       });
       await Promise.all(promises);
     },
+    // Load the movies for a specific genre
     async loadMovieByGenre({ commit, state }, genreName) {
       const genre = state.genres.find(g => g.name === genreName);
       if (!genre) {

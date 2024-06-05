@@ -12,15 +12,15 @@
           </v-card-title>
           <v-row align="center" class="align-center">
             <v-col cols="1" class text="text-center">
-              <v-btn icon @click="previousMovies(genre)">
+              <v-btn icon @click="previous(genre)">
                 <v-icon>mdi-chevron-left</v-icon>
               </v-btn>
             </v-col>
             <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +3)" :key="movie.id" cols="3" sm="3" md="3">
-              <MovieItem :cover="movie.cover" :title="movie.title"></MovieItem>
+              <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id"></MovieItem>
             </v-col>
             <v-col cols="1" class="text-center">
-              <v-btn icon @click="nextMovies(genre)">
+              <v-btn icon @click="next(genre)">
                 <v-icon>mdi-chevron-right</v-icon>
               </v-btn>
             </v-col>
@@ -49,6 +49,12 @@ export default {
   },
   methods: {
     ...mapMutations(['nextMovies', 'previousMovies']),
+    next(genre) {
+      this.nextMovies(genre.name);
+    },
+    previous(genre) {
+      this.previousMovies(genre.name);
+    },
     loadGenres() {
       this.$store.dispatch('loadGenres');
     },
