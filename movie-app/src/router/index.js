@@ -6,7 +6,7 @@ import MovieInfoPage from '../components/views/MovieInfoPage.vue'
 const routes = [
   {
     path: '/',
-    name: 'HomePage',
+    name: 'Home',
     component: HomePage
   },
   {
@@ -22,7 +22,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory('/'),
   routes
 })
 

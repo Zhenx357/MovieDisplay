@@ -13,7 +13,7 @@
       </v-navigation-drawer>
   
       <v-main>
-        <router-view></router-view>
+        <!-- No need for router-view here -->
       </v-main>
     </v-app>
   </template>
@@ -24,8 +24,8 @@
       return {
         items: [
           { title: 'Home', path: '/' },
-          { title: 'Genre' , path: '/genre/:genre'},
-          { title: 'MovieInfo', path: '/movie/:id' },
+          { title: 'Genre' , path: '/genre'},
+          { title: 'MovieInfo', path: '/movie' },
         ]
       }
     }

@@ -1,23 +1,21 @@
 <template>
   <v-app>
+    <NavigationBar />
     <v-main>
-      <HomePage/>
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HomePage from './components/views/HomePage.vue';
+import NavigationBar from './components/NavigationBar.vue'
 
 export default {
   name: 'App',
-
   components: {
-    HomePage,
-  },
-
-  data: () => ({
-    //
-  }),
+    NavigationBar
+  }
 }
 </script>

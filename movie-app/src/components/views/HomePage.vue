@@ -9,9 +9,6 @@
           <v-card-title>
             <v-typography variant="h2">{{ genre.name }} ({{ genre.count }})</v-typography>
             <v-spacer></v-spacer>
-            <router-link :to="{ name: 'Genre', params: { genre: genre.name.toLowerCase() } }">
-              <v-btn text>View All</v-btn>
-            </router-link>
           </v-card-title>
           <v-row align="center" class="align-center">
             <v-col cols="1" class text="text-center">
@@ -45,6 +42,7 @@ export default {
   },
   data() {
     return {
+      genresLoaded: false,
       genres: [
         { name: 'Action', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
         { name: 'Comedy', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
@@ -64,6 +62,11 @@ export default {
 
   methods: {
     async loadGenres() {
+      if (this.genresLoaded) {
+        return;
+      }
+      this.genresLoaded = true;
+      console.log("Loading genres")
       const promises = this.genres.map(async (genre) => { //itereating over genres and collecting them in promises array
         const { count, movies } = await fetchMoviesByGenre(genre.name.toLowerCase()); //fetching movies by genre awaiting function to complete
         genre.count = count;
