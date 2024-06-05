@@ -1,13 +1,17 @@
 <template>
-  <div id="app">
+  <v-app>
     <NavigationBar />
-    <router-view />
-  </div>
+    <v-main style="padding: 0; margin: 0;">
+
+        <router-view />
+
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 import NavigationBar from './components/NavigationBar.vue'
-import HomePage from './components/views/HomePage.vue';
+
 
 export default {
   name: 'App',

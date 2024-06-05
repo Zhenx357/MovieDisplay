@@ -10,12 +10,12 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/genre/:genre', 
+    path: '/genre/', 
     name: 'GenrePage',
     component: GenrePage
   },
   {
-    path: '/movie/:id',
+    path: '/movie/',
     name: 'MovieInfoPage',
     component: MovieInfoPage
   }
