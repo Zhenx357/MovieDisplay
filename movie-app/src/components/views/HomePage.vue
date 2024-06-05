@@ -33,50 +33,24 @@
 
 <script>
 // importing the function from API module
-import { fetchMoviesByGenre } from '../../api/api.js';
+import {mapState, mapMutations} from 'vuex';
 import MovieItem from '../MovieItem.vue';
 
 export default {
   components: {
     MovieItem,
   },
-  data() {
-    return {
-      genres: [
-        { name: 'Action', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'Comedy', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'Thriller', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'War', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'Romance', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'Drama', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'Crime', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'Documentary', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-        { name: 'Horror', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
-      ],
-    };
+  created() {
+    this.loadGenres();
+    console.log("loading Genres")
   },
-  async created() {
-    await this.loadGenres();
+  computed: {
+    ...mapState(['genres']),
   },
-
   methods: {
-    async loadGenres() {
-      const promises = this.genres.map(async (genre) => { //itereating over genres and collecting them in promises array
-        const { count, movies } = await fetchMoviesByGenre(genre.name.toLowerCase()); //fetching movies by genre awaiting function to complete
-        genre.count = count;
-        genre.movies = movies;
-      });
-      await Promise.all(promises);
-      },
-      nextMovies(genre) {
-      if (genre.currentIndex + 3 < genre.movies.length) {
-        genre.currentIndex += 3;
-      }
-    },
-    previousMovies(genre) {
-      if (genre.currentIndex > 0) {
-        genre.currentIndex -= 3;
-      }
+    ...mapMutations(['nextMovies', 'previousMovies']),
+    loadGenres() {
+      this.$store.dispatch('loadGenres');
     },
   },
 };
