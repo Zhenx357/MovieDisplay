@@ -1,9 +1,16 @@
 <template>
-  <div>
-    <h1>{{ genre }}</h1>
-    <h1>Route genre: {{ $route.params.genre }}</h1>
-    <MovieItem v-for="movie in movies" :key="movie.title" :cover="movie.cover" :title="movie.title"></MovieItem>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
+        <h1>{{ genre }}</h1>
+      </v-col>
+      <v-row align="center" class="align-center">
+        <v-col v-for="movie in movies" :key="movie.title" cols="2" sm="2" md="2">
+          <MovieItem :cover="movie.cover" :title="movie.title"></MovieItem>
+        </v-col>
+      </v-row>
+    </v-row>
+    </v-container>
 </template>
   
   <script>
