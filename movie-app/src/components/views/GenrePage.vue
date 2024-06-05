@@ -1,37 +1,36 @@
 <template>
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <v-card>
-            <v-img :src="movie.cover" aspect-ratio="1.75"></v-img>
-            <v-card-title>{{ movie.title }}</v-card-title>
-            <v-card-text>
-              <p>Details about {{ movie.title }} will go here.</p>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </template>
+  <div>
+    <h1>{{ genre }}</h1>
+    <h1>Route genre: {{ $route.params.genre }}</h1>
+    <MovieItem v-for="movie in movies" :key="movie.title" :cover="movie.cover" :title="movie.title"></MovieItem>
+  </div>
+</template>
   
   <script>
-  import { genres } from '../../data/dummyData';
-  
+import MovieItem from '../MovieItem.vue';
+import { mapState } from 'vuex';
+
   export default {
-    data() {
-      return {
-        movie: {},
-      };
+    components: {
+      MovieItem,
     },
-    created() {
-      const movieId = this.$route.params.id;
-      genres.forEach((genre) => {
-        const movie = genre.movies.find((m) => m.id === movieId);
-        if (movie) {
-          this.movie = movie;
-        }
-      });
+    props: {
+      genre: {
+        type: String,
+        required: true,
+      },
     },
+    computed: {
+    ...mapState({
+      movies: function(state) {
+        const genre = state.genres.find(g => g.name === this.genre);
+        return genre ? genre.movies : [];
+      }
+    })
+  },
+  mounted() {
+    this.$store.dispatch('loadMovieByGenre', this.genre);
+  },
   };
   </script>
   

@@ -10,9 +10,10 @@ const routes = [
     component: HomePage
   },
   {
-    path: '/genre/', 
+    path: '/genre/:genre', 
     name: 'GenrePage',
-    component: GenrePage
+    component: GenrePage,
+    props: true
   },
   {
     path: '/movie/',

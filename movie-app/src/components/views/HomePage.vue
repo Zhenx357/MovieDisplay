@@ -2,12 +2,12 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-typography variant="h1">Genre</v-typography>
+        <h1>Genre</h1>
       </v-col>
       <v-col v-for="genre in genres" :key="genre.name" cols="12">
         <v-card>
           <v-card-title>
-            <v-typography variant="h2">{{ genre.name }} ({{ genre.count }})</v-typography>
+            {{ genre.name }} ({{ genre.count }}) <router-link :to="'/genre/' + genre.name">View All</router-link>
             <v-spacer></v-spacer>
           </v-card-title>
           <v-row align="center" class="align-center">

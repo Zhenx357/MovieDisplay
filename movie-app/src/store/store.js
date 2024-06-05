@@ -1,6 +1,6 @@
 
 import {createStore} from 'vuex';
-import { fetchMoviesByGenre } from '../api/api.js'; // adjust the path as needed
+import { fetchMoviesByGenre } from '../api/api.js'; 
 
 
 export default createStore({
@@ -39,12 +39,21 @@ export default createStore({
     },
   },
   actions: {
+    // Load the movies for each genre
     async loadGenres({ commit, state }) {
       const promises = state.genres.map(async (genre) => {
         const { count, movies } = await fetchMoviesByGenre(genre.name.toLowerCase());
         commit('setMovies', { genreName: genre.name, movies, count });
       });
       await Promise.all(promises);
+    },
+    async loadMovieByGenre({ commit, state }, genreName) {
+      const genre = state.genres.find(g => g.name === genreName);
+      if (!genre) {
+        throw new Error(`Genre "${genreName}" not found`);
+      }
+      const { count, movies } = await fetchMoviesByGenre(genreName.toLowerCase());
+      commit('setMovies', { genreName, movies, count });
     },
   },
 });
