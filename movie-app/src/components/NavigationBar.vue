@@ -12,8 +12,8 @@
         </v-list>
       </v-navigation-drawer>
   
-      <v-main>
-        <router-view></router-view>
+      <v-main style="padding: 0; margin: 0;">
+      <router-view></router-view>
       </v-main>
     </v-app>
   </template>
