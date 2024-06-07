@@ -19,7 +19,7 @@
         items: [
           { title: 'Home', path: '/' },
           { title: 'Genre' , path: '/genre/:genre'},
-          { title: 'MovieInfo', path: '/movie/' },
+          { title: 'MovieInfo', path: '/movie/:id' },
         ]
       }
     }

@@ -10,7 +10,7 @@ const fetchData = async (url) => {
 };
 
 // Get all movies by the genre and return the count and the movies with the cover and title
-export const fetchMoviesByGenre = async (genre) => {
+const fetchMoviesByGenre = async (genre) => {
   const data = await fetchData(`${API_BASE_URL}?form=json&byTags=genre:${genre}&byProgramType=movie`);
   const movies = mapData(data);
   return {
@@ -37,4 +37,15 @@ const mapData = (data) => {
     };
   });
 };
+
+const fetchMovieInfo = async (id) => {  
+  console.log("fetching movie info")
+  const data = await fetchData(`${API_BASE_URL}/${id}?form=json&fields=title,description`);
+  return{
+    title: data.title,
+    description: data.description,
+  }
+}
+
+export { fetchMoviesByGenre, fetchMovieInfo };
 

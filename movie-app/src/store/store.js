@@ -1,6 +1,7 @@
 
 import {createStore} from 'vuex';
 import { fetchMoviesByGenre } from '../api/api.js'; 
+import { fetchMovieInfo } from '../api/api.js';
 
 
 export default createStore({
@@ -16,6 +17,7 @@ export default createStore({
         { name: 'Documentary', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
         { name: 'Horror', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
       ],
+      movieInfo: {},
   },
   mutations: {
     setMovies(state, { genreName, movies, count }) {
@@ -39,6 +41,9 @@ export default createStore({
         genre.currentIndex -= 3;
       }
     },
+    setMovieInfo(state, movieInfo) {
+      state.movieInfo = movieInfo;
+    }
   },
   actions: {
     // Load the movies for each genre 
@@ -58,5 +63,10 @@ export default createStore({
       const { count, movies } = await fetchMoviesByGenre(genreName.toLowerCase());
       commit('setMovies', { genreName, movies, count });
     },
+
+    async loadMovieInfo({ commit }, id) {
+      const movieInfo = await fetchMovieInfo(id);
+      commit('setMovieInfo', movieInfo);
+    }
   },
 });
