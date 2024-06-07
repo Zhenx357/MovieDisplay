@@ -6,7 +6,7 @@
       </v-col>
       <v-row align="center" class="align-center">
         <v-col v-for="movie in movies" :key="movie.title" cols="2" sm="2" md="2">
-          <MovieItem :cover="movie.cover" :title="movie.title"></MovieItem>
+          <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id"></MovieItem>
         </v-col>
       </v-row>
     </v-row>
