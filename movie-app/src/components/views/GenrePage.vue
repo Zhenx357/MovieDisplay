@@ -30,8 +30,7 @@ import { mapState } from 'vuex';
     computed: {
     ...mapState({
       movies: function(state) {
-        const genre = state.genres.find(g => g.name === this.genre);
-        return genre ? genre.movies : [];
+        return state.genres.find(g => g.name === this.genre)?.movies ?? []; //find function to find matching genre name and return movie array.
       }
     })
   },

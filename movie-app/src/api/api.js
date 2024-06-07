@@ -15,7 +15,7 @@ const fetchMoviesByGenre = async (genre) => {
   const movies = mapData(data);
   return {
     count: movies.length,
-    movies: movies,
+    movies: movies, // containing the cover and title and id
   }
 }
 
@@ -30,7 +30,7 @@ const mapData = (data) => {
   return data.entries.map(entry => {
     const coverUrl = fetchThumbnail(entry);
     const id = entry.id.split('/').pop(); //extracts the id from the url example: data/ProgramAvailability/41644072040 -> 41644072040
-    return {
+    return { // array if movies with the cover, title and id
       cover: coverUrl,
       title: entry.title,
       id: id,
@@ -38,12 +38,28 @@ const mapData = (data) => {
   });
 };
 
+// function to fetch genres
+const fetchGenres = (entry) => {
+  const genres = entry['plprogram$tags'] // gets the tags
+    .filter(tag => tag['plprogram$scheme'] === 'genre') // filters the tags that have the scheme genre
+    .map(tag => tag['plprogram$title']); // maps the title of the tags to create an array of genres
+  return genres.length > 0 ? genres : ['No Genre']; // if there are no genres it returns 'No Genre'
+};
+
+// fetching movieinfo
 const fetchMovieInfo = async (id) => {  
   console.log("fetching movie info")
-  const data = await fetchData(`${API_BASE_URL}/${id}?form=json&fields=title,description`);
+  const data = await fetchData(`${API_BASE_URL}/${id}?form=json&fields=title,description,year,thumbnails,programType,tags`);
+  const coverUrl = fetchThumbnail(data);
+  const genres = fetchGenres(data);
   return{
     title: data.title,
     description: data.description,
+    releaseYear: data.plprogram$year,
+    programType: data.plprogram$programType,
+    cover:coverUrl,
+    genres: genres,
+  
   }
 }
 
