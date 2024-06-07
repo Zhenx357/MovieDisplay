@@ -12,7 +12,20 @@
           <v-card-text>{{ movieInfo.description }}</v-card-text>
           <v-card-text>{{ movieInfo.releaseYear }}</v-card-text>
           <v-card-text>{{ movieInfo.genres }}</v-card-text>
-          <v-card-text>{{ movieInfo.credits }}</v-card-text>
+          <v-card-text v-if="movieInfo.credits">
+            <div><strong>Directors:</strong></div>
+            <div>{{ movieInfo.credits.directors [0]}}</div> 
+            <!-- only display one director, since there is duplicate data fetched from api -->
+          </v-card-text>
+          <v-card-text v-if="movieInfo.credits">
+            <div><strong>Actors:</strong></div>
+            <div v-for="(actor, index) in movieInfo.credits.actors" :key="'actor-' + index">
+              <!-- Displays the fetched actors -->
+              {{ actor }}
+            </div>
+          </v-card-text>
+          
+          
           
         </v-card>
       </v-col>

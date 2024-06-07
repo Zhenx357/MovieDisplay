@@ -2,6 +2,7 @@
 import {createStore} from 'vuex';
 import { fetchMoviesByGenre } from '../api/api.js'; 
 import { fetchMovieInfo } from '../api/api.js';
+import { fetchCredits } from '../api/api.js';
 
 
 export default createStore({
@@ -64,9 +65,11 @@ export default createStore({
       commit('setMovies', { genreName, movies, count });
     },
 
+    // loading movie info by using fetchMovieInfo and fetchCredits from api
     async loadMovieInfo({ commit }, id) {
       const movieInfo = await fetchMovieInfo(id);
-      commit('setMovieInfo', movieInfo);
+      const credits = await fetchCredits(id);
+      commit('setMovieInfo', { ...movieInfo, credits });
     }
   },
 });

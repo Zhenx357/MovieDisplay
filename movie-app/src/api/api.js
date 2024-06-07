@@ -1,3 +1,5 @@
+export { fetchMoviesByGenre, fetchMovieInfo, fetchCredits };
+
 const API_BASE_URL = 'https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas';
 
 // Function to fetch data from the API
@@ -59,9 +61,18 @@ const fetchMovieInfo = async (id) => {
     programType: data.plprogram$programType,
     cover:coverUrl,
     genres: genres,
-  
   }
 }
 
-export { fetchMoviesByGenre, fetchMovieInfo };
+// function to fetch actor and director, because fetchMovieInfo api returns blank when fetching actors and directors
+const fetchCredits = async (id) => {
+  const data = await fetchData(`${API_BASE_URL}/${id}?form=json`);
+  const directors = data.plprogram$credits.filter(credit => credit.plprogram$creditType === 'director');
+  const actors = data.plprogram$credits.filter(credit => credit.plprogram$creditType === 'actor');
+  return{
+    directors: directors.map(director => director.plprogram$personName),
+    actors: actors.map(actor => actor.plprogram$personName),
+  };
+}
+
 
