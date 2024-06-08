@@ -6,7 +6,7 @@
     </router-link>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-actions>
-            <button @click="addToWishlist">Add to Wishlist</button>
+            <button v-if="wishlistBtn" @click="addToWishlist">Add to Wishlist</button>
         </v-card-actions>
     </v-card>
 </template>
@@ -14,6 +14,7 @@
 <script>
 export default {
     props: {
+    
         cover: {
             type: String,
             required: true,
@@ -25,6 +26,10 @@ export default {
         movieID: {
             type: [String, Number],
             required: true,
+        },
+        wishlistBtn: {
+            type: Boolean,
+            default: true,
         },
     },
     methods: {
