@@ -11,12 +11,22 @@ const fetchData = async (url) => {
   return await response.json();
 };
 
+// seperate function to fetch the amount of movies by genre to reduce load time
+const fetchGenreCount = async (genre) => {
+  const data = await fetchData(`${API_BASE_URL}?form=json&byTags=genre:${genre}&byProgramType=movie&fields=title&range=1-10000`);
+  return {
+    count: data.entryCount
+  }
+}
+
+
 // Get all movies by the genre and return the count and the movies with the cover and title
 const fetchMoviesByGenre = async (genre) => {
-  const data = await fetchData(`${API_BASE_URL}?form=json&byTags=genre:${genre}&byProgramType=movie`);
+  const data = await fetchData(`${API_BASE_URL}?form=json&byTags=genre:${genre}&byProgramType=movie&range=1-150`);
   const movies = mapData(data);
+  const genreAmount = await fetchGenreCount(genre);
   return {
-    count: movies.length,
+    count: genreAmount.count,
     movies: movies, // containing the cover and title and id
   }
 }
