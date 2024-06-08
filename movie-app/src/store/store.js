@@ -62,6 +62,11 @@ export default createStore({
         console.log('Movie added to wishlist:', movie);
       }
     },
+
+    removeFromWishlist(state, movie) {
+      state.wishlist = state.wishlist.filter(item => item.id !== movie.id);
+      console.log('Movie removed from wishlist:', movie);
+    },
   },
   actions: {
     // Load the movies for each genre 
@@ -90,6 +95,9 @@ export default createStore({
     },
     addWishlist({ commit }, movie) {
       commit('addWishlist', movie);
+    },
+    removeFromWishlist({ commit }, movie) {
+      commit('removeFromWishlist', movie);
     },
   },
 });
