@@ -10,8 +10,8 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-btn @click="previous">Previous</v-btn>
-        <v-btn @click="next">Next</v-btn>
+        <v-btn @click="previousPage">Previous</v-btn>
+        <v-btn @click="nextPage">Next</v-btn>
       </v-row>
     </v-row>
     </v-container>
@@ -44,11 +44,11 @@ import { mapState } from 'vuex';
     })
   },
   methods: {
-    async next() {
+    async nextPage() {
       this.page++;
       await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });
     },
-    async previous() {
+    async previousPage() {
       if (this.page > 1) {
         this.page--;
         await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });

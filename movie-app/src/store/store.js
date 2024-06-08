@@ -32,14 +32,22 @@ export default createStore({
     nextMovies(state, genreName) {
       const genre = state.genres.find(g => g.name === genreName); // finds the genre that matches the genreName
       if (genre) {
-        genre.currentIndex += 3;
+        if (genre.currentIndex + 3 >= genre.movies.length) {
+          genre.currentIndex = 0; // reset to start if we're at the end
+        } else {
+          genre.currentIndex += 3;
+        }
       }
     },
     // Load the previous 3 movies
     previousMovies(state, genreName) {
       const genre = state.genres.find(g => g.name === genreName);
-      if (genre && genre.currentIndex >=3) {
-        genre.currentIndex -= 3;
+      if (genre) {
+        if (genre.currentIndex - 3 < 0) {
+          genre.currentIndex = genre.movies.length - 3; // reset to end if we're at the start
+        } else {
+          genre.currentIndex -= 3;
+        }
       }
     },
     setMovieInfo(state, movieInfo) {
