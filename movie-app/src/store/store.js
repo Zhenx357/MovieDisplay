@@ -19,6 +19,7 @@ export default createStore({
         { name: 'Horror', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
       ],
       movieInfo: {},
+      wishlist: []
   },
   mutations: {
     setMovies(state, { genreName, movies, count }) {
@@ -52,7 +53,15 @@ export default createStore({
     },
     setMovieInfo(state, movieInfo) {
       state.movieInfo = movieInfo;
-    }
+    },
+
+    addWishlist(state, movie) {
+      // prevent duplicate movies in wishlist
+      if (!state.wishlist.some(item => item.id === movie.id)) {
+        state.wishlist.push(movie);
+        console.log('Movie added to wishlist:', movie);
+      }
+    },
   },
   actions: {
     // Load the movies for each genre 
@@ -78,6 +87,9 @@ export default createStore({
       const movieInfo = await fetchMovieInfo(id);
       const credits = await fetchCredits(id);
       commit('setMovieInfo', { ...movieInfo, credits });
-    }
+    },
+    addWishlist({ commit }, movie) {
+      commit('addWishlist', movie);
+    },
   },
 });

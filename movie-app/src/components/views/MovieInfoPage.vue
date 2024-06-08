@@ -23,6 +23,9 @@
               <!-- Displays the fetched actors -->
               {{ actor }}
             </div>
+            <v-card-text> 
+              <v-btn @click="addToWishlist(movieInfo.id)">Add to Wishlist</v-btn>
+            </v-card-text>
           </v-card-text>
           
           

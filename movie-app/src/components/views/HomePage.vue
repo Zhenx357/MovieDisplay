@@ -17,7 +17,7 @@
               </v-btn>
             </v-col>
             <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +3)" :key="movie.id" cols="3" sm="3" md="3">
-              <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id"></MovieItem>
+              <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id" @add-to-wishlist="handleAddToWishlist"></MovieItem>
             </v-col>
             <v-col cols="1" class="text-center">
               <v-btn icon @click="next(genre)">
@@ -57,6 +57,10 @@ export default {
     },
     loadGenres() {
       this.$store.dispatch('loadGenres');
+    },
+    handleAddToWishlist(movie) {
+      console.log('handleAddToWishlist called', movie);
+      this.$store.commit('addWishlist', movie);
     },
   },
 };

@@ -6,14 +6,12 @@
     </router-link>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-actions>
+            <button @click="addToWishlist">Add to Wishlist</button>
         </v-card-actions>
     </v-card>
 </template>
 
 <script>
-
-
-
 export default {
     props: {
         cover: {
@@ -30,7 +28,12 @@ export default {
         },
     },
     methods: {
-        viewDetails() {
+        addToWishlist() {
+            this.$emit('add-to-wishlist',{
+                cover: this.cover,
+                title: this.title,
+                id: this.movieID
+            })
         },
     },
 };
