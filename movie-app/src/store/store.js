@@ -56,12 +56,12 @@ export default createStore({
       await Promise.all(promises);
     },
     // Load the movies for a specific genre
-    async loadMovieByGenre({ commit, state }, genreName) {
+    async loadMovieByGenre({ commit, state }, { genre: genreName, page, pageSize }) {
       const genre = state.genres.find(g => g.name === genreName);
       if (!genre) {
         throw new Error(`Genre "${genreName}" not found`);
       }
-      const { count, movies } = await fetchMoviesByGenre(genreName.toLowerCase());
+      const { count, movies } = await fetchMoviesByGenre(genreName.toLowerCase(), page, pageSize);
       commit('setMovies', { genreName, movies, count });
     },
 

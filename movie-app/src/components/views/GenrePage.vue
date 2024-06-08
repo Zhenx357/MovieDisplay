@@ -9,6 +9,10 @@
           <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id"></MovieItem>
         </v-col>
       </v-row>
+      <v-row>
+        <v-btn @click="previous">Previous</v-btn>
+        <v-btn @click="next">Next</v-btn>
+      </v-row>
     </v-row>
     </v-container>
 </template>
@@ -20,6 +24,11 @@ import { mapState } from 'vuex';
   export default {
     components: {
       MovieItem,
+    },
+    data() {
+      return {
+        page: 1,
+      };
     },
     props: {
       genre: {
@@ -34,8 +43,20 @@ import { mapState } from 'vuex';
       }
     })
   },
+  methods: {
+    async next() {
+      this.page++;
+      await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });
+    },
+    async previous() {
+      if (this.page > 1) {
+        this.page--;
+        await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });
+      }
+    },
+  },
   mounted() {
-    this.$store.dispatch('loadMovieByGenre', this.genre);
+    this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });
   },
   };
   </script>
