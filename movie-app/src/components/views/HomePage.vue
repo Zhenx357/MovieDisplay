@@ -18,7 +18,7 @@
           </v-card-title>
           <v-row>
             <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +4)" :key="movie.id" cols="3">
-              <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id" @add-to-wishlist="handleAddToWishlist"></MovieItem>
+              <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id" @add-to-wishlist="AddToWishlist"></MovieItem>
             </v-col>
           </v-row>
         </v-card>
@@ -54,7 +54,7 @@ export default {
     loadGenres() {
       this.$store.dispatch('loadGenres');
     },
-    handleAddToWishlist(movie) {
+    AddToWishlist(movie) {
       console.log('handleAddToWishlist called', movie);
       this.$store.commit('addWishlist', movie);
     },

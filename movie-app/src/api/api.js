@@ -67,6 +67,7 @@ const fetchMovieInfo = async (id) => {
   const coverUrl = fetchThumbnail(data);
   const genres = fetchGenres(data);
   return{
+    id: id,
     title: data.title,
     description: data.description,
     releaseYear: data.plprogram$year,

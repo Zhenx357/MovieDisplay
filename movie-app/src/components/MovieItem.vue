@@ -14,9 +14,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
     props: {
-    
         cover: {
             type: String,
             required: true,
@@ -35,14 +35,15 @@ export default {
         },
     },
     methods: {
-        addToWishlist() {
-            this.$emit('add-to-wishlist',{
-                cover: this.cover,
-                title: this.title,
-                id: this.movieID
-            })
-        },
+    addToWishlist() {
+      const movie = {
+        cover: this.cover,
+        title: this.title,
+        id: this.movieID
+      };
+      this.$store.commit('addToWishlist', movie);
     },
+  },
 };
 </script>
 

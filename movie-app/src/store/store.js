@@ -54,12 +54,14 @@ export default createStore({
     setMovieInfo(state, movieInfo) {
       state.movieInfo = movieInfo;
     },
-
-    addWishlist(state, movie) {
-      // prevent duplicate movies in wishlist
-      if (!state.wishlist.some(item => item.id === movie.id)) {
-        state.wishlist.push(movie);
+// Add to wishlist function
+    addToWishlist(state, movie) {
+      if(!state.wishlist.find(item => item.id === movie.id)) { //checks if the movie is already in the wishlist
+        state.wishlist.push(movie); // adds the movie to the wishlist
         console.log('Movie added to wishlist:', movie);
+      }
+      else {
+        console.log('Movie already in wishlist:', movie);
       }
     },
 

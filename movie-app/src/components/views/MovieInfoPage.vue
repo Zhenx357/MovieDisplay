@@ -29,7 +29,7 @@
             </v-col>
           </v-row>
           <v-card-actions>
-            <v-btn class="flex-grow-1" color="primary" @click="addToWishlist">Add to Wishlist</v-btn>
+            <v-btn class="flex-grow-1" color="primary" @click="AddToWishlist(movieInfo)">Add to Wishlist</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -49,15 +49,10 @@
       .catch(error => console.error('Error loading movie info:', error));
   },
   methods: {
-    ...mapMutations(['addWishlist']),
-    addToWishlist() {
-      const movie = {
-        id: this.movieInfo.id,
-        title: this.movieInfo.title,
-        cover: this.movieInfo.cover,
-        // Add any other necessary movie data...
-      };
-      this.addWishlist(movie);
+    AddToWishlist(movie) {
+      console.log('AddToWishlist called', movie);
+      // Add the movie to the wishlist
+      this.$store.commit('addToWishlist', movie);
     },
     // ...
   },
