@@ -48,7 +48,7 @@
     genreBackground() {
       if(this.movieInfo.genres && this.movieInfo.genres.length > 0) { //check if genre is available
         let genre = this.movieInfo.genres[0].replace(/\s+/g, '-').toLowerCase(); //replace space with dash and convert to lowercase
-        return `background-image: url('/public/${genre}.jpg');`; //return the background image based on the genre
+        return `background-image: url('/public/${genre}.jpg'); background-size: cover`;  //return the background image based on the genre
       }
       return ''; //return empty string if genre is not available
     },

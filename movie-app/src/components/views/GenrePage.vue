@@ -9,8 +9,14 @@
           <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id"></MovieItem>
         </v-col>
       </v-row>
-        <v-btn v-show="page > 1" @click="previousPage">Previous</v-btn>
-        <v-btn @click="nextPage">Next</v-btn>
+      <v-row justify="center" class="my-4">
+        <v-pagination
+          v-model="page"
+          :length="totalPages"
+          :total-visible="10"
+          @input="changePage"
+        ></v-pagination>
+      </v-row>
     </v-row>
     </v-container>
 </template>
@@ -26,6 +32,7 @@ import { mapState } from 'vuex';
     data() {
       return {
         page: 1,
+        pageSize: 12,
       };
     },
     props: {
@@ -39,25 +46,27 @@ import { mapState } from 'vuex';
       movies: function(state) {
         return state.genres.find(g => g.name === this.genre)?.movies ?? []; //find function to find matching genre name and return movie array.
       },
-      movieCount(){
+      movieCount() {
         return this.$store.getters.getGenreCount(this.genre);
-      }
+      },
     }),
+    totalPages() {
+      return Math.ceil(this.movieCount / this.pageSize); //calculate total pages based on movie count and page size
+    },
   },
   methods: {
-    async nextPage() {
-      this.page++;
-      await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 12 });
-    },
-    async previousPage() {
-      if (this.page > 1) {
-        this.page--;
-        await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 12 });
-      }
+    async changePage() {
+      await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: this.pageSize });
     },
   },
+  watch: {
+    //  Watch for changes in the page and run the changePage method
+      page() {
+        this.changePage();
+      }
+    },
   mounted() {
-    this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 12 });
+    this.changePage();
   },
   };
   </script>

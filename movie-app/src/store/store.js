@@ -81,6 +81,7 @@ export default createStore({
     },
     // Load the movies for a specific genre
     async loadMovieByGenre({ commit, state }, { genre: genreName, page, pageSize }) {
+      console.log('Loading movies for genre:', genreName, 'page:', page, 'pageSize:', pageSize)
       const genre = state.genres.find(g => g.name === genreName);
       if (!genre) {
         throw new Error(`Genre "${genreName}" not found`);

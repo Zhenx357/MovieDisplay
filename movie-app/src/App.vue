@@ -21,10 +21,10 @@ export default {
     }
   },
   methods: {
-    // method to update the background style to include in the v-main component
+    // method to update the background style to include in the v
     updateBackground(style) {
       console.log('updateBackground called with:', style);
-      this.backgroundStyle = style;
+      this.backgroundStyle = `${style} background-size: cover;`;
     },
   },
 };
