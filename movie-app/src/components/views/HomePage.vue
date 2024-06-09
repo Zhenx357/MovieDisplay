@@ -10,8 +10,8 @@
             <v-btn icon @click="previous(genre)">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
-            {{ genre.name }} ({{ genre.count }})
-            <router-link :to="'/genre/' + genre.name">View All</router-link>
+            <router-link :to="'/genre/' + genre.name">{{ genre.name }} ({{ genre.count }})</router-link>
+            
             <v-btn icon @click="next(genre)">
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>

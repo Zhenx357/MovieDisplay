@@ -63,7 +63,7 @@ const fetchGenres = (entry) => {
 // fetching movieinfo
 const fetchMovieInfo = async (id) => {  
   console.log("fetching movie info")
-  const data = await fetchData(`${API_BASE_URL}/${id}?form=json&fields=title,description,year,thumbnails,programType,tags`);
+  const data = await fetchData(`${API_BASE_URL}/${id}?form=json&fields=title,description,year,thumbnails,programType,tags,tdc$youtubeTrailer`);
   const coverUrl = fetchThumbnail(data);
   const genres = fetchGenres(data);
   return{
@@ -73,6 +73,7 @@ const fetchMovieInfo = async (id) => {
     programType: data.plprogram$programType,
     cover:coverUrl,
     genres: genres,
+    trailer: data['tdc$youtubeTrailer'] || null,
   }
 }
 

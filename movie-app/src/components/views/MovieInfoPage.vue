@@ -8,6 +8,9 @@
         <v-card>
           <v-img :src="movieInfo.cover" aspect-ratio="1.75"></v-img>
           <v-card-title>{{ movieInfo.title }}</v-card-title>
+          <v-card-text v-if="movieInfo.trailer">
+            <iframe :src="'https://www.youtube.com/embed/' + movieInfo.trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </v-card-text>
           <v-card-text>{{ movieInfo.programType }}</v-card-text>
           <v-card-text>{{ movieInfo.description }}</v-card-text>
           <v-card-text>{{ movieInfo.releaseYear }}</v-card-text>
