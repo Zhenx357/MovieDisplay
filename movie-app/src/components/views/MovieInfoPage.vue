@@ -14,9 +14,9 @@
               <v-card-text> <strong> Genre(s):</strong>{{ movieInfo.genres }} </v-card-text>
               <v-card-text> <strong> Released in:</strong> {{ movieInfo.releaseYear }} </v-card-text>
           <v-card-text v-if="movieInfo.credits">
-            <div><strong>Directors:</strong></div>
+            <strong>Directors:</strong>
             <!-- only display one director, since there is duplicate data fetched from api -->
-            <div>{{ movieInfo.credits.directors [0]}}</div> 
+            {{ movieInfo.credits.directors [0]}}
           </v-card-text>
           <v-card-text v-if="movieInfo.credits">
             <div><strong>Actors:</strong></div>
@@ -30,7 +30,7 @@
             </v-col>
           </v-row>
           <v-card-actions>
-            <v-btn class="flex-grow-1" color="primary" x-large outlined  @click="AddToWishlist(movieInfo)">Add to Wishlist</v-btn>
+            <v-btn class="flex-grow-1 custom button"  color="black"  @click="AddToWishlist(movieInfo)">Add to Wishlist</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -83,8 +83,11 @@
 </script>
   
  <style scoped>
+ .v-card-text {
+  margin-bottom: 0%
+}
 .movie-card {
-  padding: 20px;
+  padding: 0px;
   background-color: rgba(255, 255, 255, 0.5)
 }
 
@@ -95,7 +98,7 @@
 }
 
 .movie-description {
-  margin-top: 20px;
+  margin-bottom: 0;
 }
 
 .trailer {
@@ -112,8 +115,19 @@
   padding: 0 
 }
 
-.v-card-text, h1 {
-  color: black;
+
+.v-card-text {
+  padding-bottom: 0;
+}
+
+.custom.button {
+  height: 60px;
+  font-size: 20px;
+}
+
+.movie-cover {
+  height: 100%;
+  width:  auto;
 }
 
 </style>

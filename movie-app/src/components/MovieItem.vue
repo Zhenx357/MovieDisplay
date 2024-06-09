@@ -52,6 +52,6 @@ export default {
 <style scoped>
 .movie-cover {
     height: auto;
-    width:  100%;
+    width:  auto;
 }
 </style>

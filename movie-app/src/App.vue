@@ -2,7 +2,9 @@
   <v-app>
     <NavigationBar />
     <v-main :style="backgroundStyle" class="pa-0">
+      <v-container>
         <router-view @backgroundChange="updateBackground" />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -32,7 +34,13 @@ export default {
 
 <style scoped>
 .v-main {
-  padding: 0 !important;
+  padding-left: 70px;
+  width: 100%;
+  height: 100%;
+}
+
+.v-container {
+  padding-left: 100px;
   width: 100%;
   height: 100%;
 }
