@@ -6,23 +6,19 @@
       </v-col>
       <v-col v-for="genre in genres" :key="genre.name" cols="12">
         <v-card>
-          <v-card-title>
-            {{ genre.name }} ({{ genre.count }}) <router-link :to="'/genre/' + genre.name">View All</router-link>
-            <v-spacer></v-spacer>
+          <v-card-title class="d-flex justify-space-between">
+            <v-btn icon @click="previous(genre)">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+            {{ genre.name }} ({{ genre.count }})
+            <router-link :to="'/genre/' + genre.name">View All</router-link>
+            <v-btn icon @click="next(genre)">
+              <v-icon>mdi-arrow-right</v-icon>
+            </v-btn>
           </v-card-title>
-          <v-row align="center" class="align-center">
-            <v-col cols="1" class text="text-center">
-              <v-btn icon @click="previous(genre)">
-                <v-icon>mdi-chevron-left</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +3)" :key="movie.id" cols="3" sm="3" md="3">
+          <v-row>
+            <v-col v-for="movie in genre.movies.slice(genre.currentIndex, genre.currentIndex +4)" :key="movie.id" cols="3">
               <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id" @add-to-wishlist="handleAddToWishlist"></MovieItem>
-            </v-col>
-            <v-col cols="1" class="text-center">
-              <v-btn icon @click="next(genre)">
-                <v-icon>mdi-chevron-right</v-icon>
-              </v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -67,7 +63,5 @@ export default {
 </script>
 
 <style scoped>
-.v-card {
-  margin-bottom: 20px;
-}
+
 </style>

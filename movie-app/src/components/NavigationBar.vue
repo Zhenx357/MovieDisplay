@@ -1,5 +1,5 @@
 <template>
-      <v-navigation-drawer app permanent>
+      <v-navigation-drawer app permanent width="150">
         <v-list>
           <v-list-item v-for="item in items" :key="item.title" link>
             <v-list-item-content>

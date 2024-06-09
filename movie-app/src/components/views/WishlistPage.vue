@@ -7,11 +7,10 @@
             <v-col v-for="movie in wishlist" :key="movie.id" cols="3" sm="3" md="3">
                 <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id" :wishlistBtn="false">
                     <template v-slot:button>
-                        <v-btn @click="removeFromWishlist(movie)">
-                            <font-awesome-icon :icon="['fas', 'trash']" />
+                        <v-btn class="text-center" color="red" @click="removeFromWishlist(movie)">
+                            Remove from Wishlist
                         </v-btn>
                     </template>
-                    <v-btn @click="removeFromWishlist(movie)"></v-btn>
                 </MovieItem>
         </v-col>
         </v-row>

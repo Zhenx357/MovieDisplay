@@ -8,10 +8,17 @@ import store from './store/store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import '@mdi/font/css/materialdesignicons.css'
 
 library.add(fas)
 
 loadFonts()
+const opts = {
+  icons: {
+    iconfont: 'mdi', // default - only for display purposes
+  },
+}
+
 
 createApp(App)
   .use(vuetify)
