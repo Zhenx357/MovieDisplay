@@ -8,12 +8,12 @@
         <v-card>
           <v-card-title class="d-flex justify-space-between">
             <!-- Button to go to the previous genre -->
-            <v-btn icon @click="goToPreviousGenre(genre)">
+            <v-btn icon @click="previous(genre)">
               <v-icon>mdi-arrow-left</v-icon>
             </v-btn>
             <router-link :to="'/genre/' + genre.name">{{ genre.name }} ({{ genre.count }})</router-link>
             <!-- Button to go to the next genre -->
-            <v-btn icon @click="goToNextGenre(genre)">
+            <v-btn icon @click="next(genre)">
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
           </v-card-title>
