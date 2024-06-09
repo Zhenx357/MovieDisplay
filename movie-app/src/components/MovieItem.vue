@@ -10,7 +10,6 @@
         <v-btn class="flex-grow-1" v-if="wishlistBtn" color="primary" @click="addToWishlist">Add to Wishlist</v-btn>
         <slot name="button"></slot>
     </v-card-actions>
- 
     </v-card>
 </template>
 

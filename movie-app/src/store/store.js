@@ -93,9 +93,7 @@ export default createStore({
       const credits = await fetchCredits(id);
       commit('setMovieInfo', { ...movieInfo, credits });
     },
-    addWishlist({ commit }, movie) {
-      commit('addWishlist', movie);
-    },
+    
     removeFromWishlist({ commit }, movie) {
       commit('removeFromWishlist', movie);
     },
