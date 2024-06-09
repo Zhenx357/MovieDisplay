@@ -64,8 +64,8 @@ const fetchGenres = (entry) => {
 const fetchMovieInfo = async (id) => {  
   console.log("fetching movie info")
   const data = await fetchData(`${API_BASE_URL}/${id}?form=json&fields=title,description,year,thumbnails,programType,tags,tdc$youtubeTrailer`);
-  const coverUrl = fetchThumbnail(data);
-  const genres = fetchGenres(data);
+  const coverUrl = fetchThumbnail(data); // fetches the thumbnail
+  const genres = fetchGenres(data); // fetches the genres
   return{
     id: id,
     title: data.title,

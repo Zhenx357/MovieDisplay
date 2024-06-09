@@ -2,19 +2,17 @@
     <v-card>
         <v-card-title class="justify-center">
             {{ title }} 
-         </v-card-title>
+        </v-card-title>
         <router-link :to="'/movie/' + movieID">
-        <v-img :src="cover" class="movie-cover"></v-img>
-    </router-link>
-    <v-card-actions class="justify-center">
-        <v-btn class="flex-grow-1" v-if="wishlistBtn" color="primary" @click="addToWishlist">Add to Wishlist</v-btn>
-        <slot name="button"></slot>
-    </v-card-actions>
+            <v-img :src="cover" class="movie-cover"></v-img>
+        </router-link>
+        <v-card-actions class="justify-center">
+            <v-btn class="flex-grow-1" v-if="wishlistBtn" color="primary" @click="addToWishlist">Add to Wishlist</v-btn>
+        </v-card-actions>
     </v-card>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
 export default {
     props: {
         cover: {
@@ -35,16 +33,16 @@ export default {
         },
     },
     methods: {
-    addToWishlist() {
-      const movie = {
-        cover: this.cover,
-        title: this.title,
-        id: this.movieID
-      };
-      this.$store.commit('addToWishlist', movie);
+        addToWishlist() {
+            const movie = {
+                cover: this.cover,
+                title: this.title,
+                id: this.movieID
+            };
+            this.$store.commit('addToWishlist', movie);
+        },
     },
-  },
-};
+    };
 </script>
 
 <style scoped>
@@ -52,5 +50,4 @@ export default {
     height: auto;
     width:  100%;
 }
-
 </style>

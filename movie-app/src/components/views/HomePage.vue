@@ -7,12 +7,13 @@
       <v-col v-for="genre in genres" :key="genre.name" cols="12">
         <v-card>
           <v-card-title class="d-flex justify-space-between">
-            <v-btn icon @click="previous(genre)">
-        <v-icon>mdi-arrow-left</v-icon>
-      </v-btn>
+            <!-- Button to go to the previous genre -->
+            <v-btn icon @click="goToPreviousGenre(genre)">
+              <v-icon>mdi-arrow-left</v-icon>
+            </v-btn>
             <router-link :to="'/genre/' + genre.name">{{ genre.name }} ({{ genre.count }})</router-link>
-            
-            <v-btn icon @click="next(genre)">
+            <!-- Button to go to the next genre -->
+            <v-btn icon @click="goToNextGenre(genre)">
               <v-icon>mdi-arrow-right</v-icon>
             </v-btn>
           </v-card-title>

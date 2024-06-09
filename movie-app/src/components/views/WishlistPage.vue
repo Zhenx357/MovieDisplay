@@ -12,7 +12,7 @@
                         </v-btn>
                     </template>
                 </MovieItem>
-        </v-col>
+            </v-col>
         </v-row>
     </v-container>
 </template>
@@ -29,10 +29,10 @@ export default {
         ...mapState(['wishlist']),
     },
     methods: {
+        //  Remove the movie from the wishlist
         removeFromWishlist(movie) {
             this.$store.commit('removeFromWishlist', movie);
         },
     },
 }
-
 </script>
