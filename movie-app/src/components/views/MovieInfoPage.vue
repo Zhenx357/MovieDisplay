@@ -26,11 +26,11 @@
               </div>
             </div>
           </v-card-text>
-          <v-card-actions>
-            <btn><v-btn class="flex-grow-1" color="primary" @click="addToWishlist">Add to Wishlist</v-btn></btn>
-          </v-card-actions>
             </v-col>
           </v-row>
+          <v-card-actions>
+            <v-btn class="flex-grow-1" color="primary" @click="addToWishlist">Add to Wishlist</v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
