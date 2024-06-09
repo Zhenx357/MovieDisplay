@@ -1,4 +1,5 @@
 <template>
+    <!-- MovieItem component to reuse to show movies with cover, title and wishlish button-->
     <v-card>
         <v-card-title class="justify-center">
             {{ title }} 
@@ -7,13 +8,16 @@
             <v-img :src="cover" class="movie-cover"></v-img>
         </router-link>
         <v-card-actions class="justify-center">
-            <v-btn class="flex-grow-1" v-if="wishlistBtn" color="primary" @click="addToWishlist">Add to Wishlist</v-btn>
+            <!-- Add to wishlist button -->
+            <v-btn class="flex-grow-1" v-if="wishlistBtn" color="primary" @click="addToWishlist">Add to Wishlist</v-btn> <!-- v-if so i can disable the button on another component -->
+            <slot name="button"></slot> <!-- slot for button -->
         </v-card-actions>
     </v-card>
 </template>
 
 <script>
 export default {
+    //  Props to pass the cover, title and movieID to another component
     props: {
         cover: {
             type: String,

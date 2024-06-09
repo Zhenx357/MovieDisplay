@@ -7,6 +7,7 @@
             <v-col v-for="movie in wishlist" :key="movie.id" cols="3" sm="3" md="3">
                 <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id" :wishlistBtn="false">
                     <template v-slot:button>
+                        <!-- insert removeFromWishlist button in the movieitem component -->
                         <v-btn class="text-center" color="red" @click="removeFromWishlist(movie)">
                             Remove from Wishlist
                         </v-btn>

@@ -65,6 +65,7 @@
       this.$store.commit('addToWishlist', movieInfo);
     },
   },
+  // Emit the background change event when the movie info is changed
   watch: {
     movieInfo() {
       this.$emit('backgroundChange', this.genreBackground);
