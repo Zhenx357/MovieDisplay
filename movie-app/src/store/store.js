@@ -18,8 +18,8 @@ export default createStore({
         { name: 'Documentary', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
         { name: 'Horror', count: 0, movies: [], moviesLoaded: 3, currentIndex: 0},
       ],
-      movieInfo: {},
-      wishlist: []
+      movieInfo: {},// object containing the movie info
+      wishlist: []// array containing the movies in the wishlist
   },
   mutations: {
     setMovies(state, { genreName, movies, count }) {

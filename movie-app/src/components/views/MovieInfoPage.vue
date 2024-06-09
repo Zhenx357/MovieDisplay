@@ -1,5 +1,5 @@
 <template>
- <v-container>
+ <v-container :style="genreBackground">
     <v-row>
       <v-col cols="12">
         <v-card class ="movie-card">
@@ -38,24 +38,42 @@
 </template>
   
   <script>
-  import { mapState, mapMutations } from 'vuex';
-  
+  import { mapState} from 'vuex';
+
   export default {
   computed: {
-    ...mapState(['movieInfo'])
+    ...mapState(['movieInfo']),
+    genreBackground() {
+      if(this.movieInfo.genres && this.movieInfo.genres.length > 0) {
+        let genre = this.movieInfo.genres[0].replace(/\s+/g, '-').toLowerCase();
+        return `background-image: url('/public/${genre}.jpg');`;
+      }
+      return '';
+    },
   },
+  //  Fetch the movie info when the component is mounted
   mounted() {
     this.$store.dispatch('loadMovieInfo', this.$route.params.id)
       .catch(error => console.error('Error loading movie info:', error));
   },
   methods: {
-    AddToWishlist(movie) {
-      console.log('AddToWishlist called', movie);
+    AddToWishlist(movieInfo) {
+      console.log('AddToWishlist called', movieInfo);
       // Add the movie to the wishlist
-      this.$store.commit('addToWishlist', movie);
+      this.$store.commit('addToWishlist', movieInfo);
     },
-    // ...
   },
+  watch: {
+    movieInfo() {
+      this.$emit('backgroundChange', this.genreBackground);
+    },
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$emit('backgroundChange', 'default-background');
+    console.log('beforeRouteLeave called');
+    next();
+  },
+  
 };
 
 </script>
@@ -63,6 +81,7 @@
  <style scoped>
 .movie-card {
   padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5)
 }
 
 .movie-details {
