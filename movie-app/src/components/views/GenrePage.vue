@@ -2,17 +2,15 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h1>{{ genre }}</h1>
+        <h1>{{ genre }} {{ movieCount }}</h1>
       </v-col>
-      <v-row align="center" class="align-center">
-        <v-col v-for="movie in movies" :key="movie.title" cols="2" sm="2" md="2">
+      <v-row>
+        <v-col v-for="movie in movies" :key="movie.title" cols="2">
           <MovieItem :cover="movie.cover" :title="movie.title" :movieID="movie.id"></MovieItem>
         </v-col>
       </v-row>
-      <v-row>
-        <v-btn @click="previousPage">Previous</v-btn>
+        <v-btn v-show="page > 1" @click="previousPage">Previous</v-btn>
         <v-btn @click="nextPage">Next</v-btn>
-      </v-row>
     </v-row>
     </v-container>
 </template>
@@ -40,23 +38,26 @@ import { mapState } from 'vuex';
     ...mapState({
       movies: function(state) {
         return state.genres.find(g => g.name === this.genre)?.movies ?? []; //find function to find matching genre name and return movie array.
+      },
+      movieCount(){
+        return this.$store.getters.getGenreCount(this.genre);
       }
-    })
+    }),
   },
   methods: {
     async nextPage() {
       this.page++;
-      await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });
+      await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 12 });
     },
     async previousPage() {
       if (this.page > 1) {
         this.page--;
-        await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });
+        await this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 12 });
       }
     },
   },
   mounted() {
-    this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 50 });
+    this.$store.dispatch('loadMovieByGenre', { genre: this.genre, page: this.page, pageSize: 12 });
   },
   };
   </script>

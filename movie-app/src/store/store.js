@@ -100,4 +100,12 @@ export default createStore({
       commit('removeFromWishlist', movie);
     },
   },
+
+  getters: {
+    // Get the movies count for a specific genre
+    getGenreCount: (state) => (genreName) => {
+      const genre = state.genres.find(g => g.name === genreName);
+      return genre ? genre.count : 0;
+  }
+},
 });
