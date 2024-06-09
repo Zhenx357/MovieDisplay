@@ -35,7 +35,7 @@ const fetchMoviesByGenre = async (genre, page = 1, pageSize = 12) => {
 
 // Function to fetch the thumbnail
 const fetchThumbnail = (entry) => {
-  const coverUrl = entry['plprogram$thumbnails']?.['orig-460x320']?.['plprogram$url'] || 'https://via.placeholder.com/150';
+  const coverUrl = entry['plprogram$thumbnails']?.['orig-460x320']?.['plprogram$url'] || 'https://via.placeholder.com/320x460';
   return coverUrl;
 };
 

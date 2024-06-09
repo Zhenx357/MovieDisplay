@@ -1,13 +1,17 @@
 <template>
     <v-card>
+        <v-card-title class="d-flex justify-space-between">
+            {{ title }}
+            <button v-if="wishlistBtn" @click="addToWishlist">
+                <font-awesome-icon :icon="['fas', 'heart']" />
+            </button>
+            <slot name="button"></slot>
+         </v-card-title>
         <router-link :to="'/movie/' + movieID">
-            
-        <v-img :src="cover" aspect-ratio="1.75"></v-img>
+        <v-img :src="cover" class="movie-cover"></v-img>
     </router-link>
-        <v-card-title>{{ title }}</v-card-title>
-        <v-card-actions>
-            <button v-if="wishlistBtn" @click="addToWishlist">Add to Wishlist</button>
-        </v-card-actions>
+        
+ 
     </v-card>
 </template>
 
@@ -43,3 +47,10 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.movie-cover {
+    height: auto;
+    width:  100%;
+}
+</style>
